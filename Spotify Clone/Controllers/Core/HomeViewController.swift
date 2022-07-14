@@ -7,14 +7,27 @@
 
 import UIKit
 class HomeViewController: UIViewController {
+  var albums = [NewReleasesResponse]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Home"
+        title = "Browse"
         view.backgroundColor = .systemBackground
       navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
-        // Do any additional setup after loading the view.
+      fetchData()
     }
+
+  private func fetchData() {
+    APICaller.shared.getRecommendations{ result in
+//      switch result {
+//      case .success(let model): break
+//      case .failure(let error): break
+//      }
+    }
+  }
+  private func updateModel() {
+    
+  }
   @objc func didTapSettings() {
     let vc = SettingsViewController()
     vc.title = "Settings"

@@ -30,7 +30,7 @@ final class APICaller{
 
         do {
           let result =  try JSONDecoder().decode(UserProfile.self, from: data)
-//          print(result)
+
           completion(.success(result))
         }
         catch {
@@ -44,7 +44,6 @@ final class APICaller{
 
   public func getRecommendedGenres(completion: @escaping ((Result<RecommendedGenresResponse,Error>)-> Void)) {
     createRequest(with: URL(string: Constants.baseApiURL + "/recommendations/available-genre-seeds"), type: .GET){ request in
-      print("Starting recommendations api call...")
       let task = URLSession.shared.dataTask(with: request) { data, _, error in
         guard let data = data, error == nil else {
           completion(.failure(APIError.failedToGetData))
@@ -77,7 +76,7 @@ return
         }
         do {
           let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
-          print(result)
+
         completion(.success(result))
         } catch {
 
